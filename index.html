@@ -10,12 +10,30 @@
 <body>
 
 <div id="app">
-    <h1>Test Article</h1>
-    <p>Welcome to testing with Vue 3</p>
-    <div class="card">
-        <img src="img/vue.png">
-        <h1>Judul</h1>
-        <p>Deskripsi</p>
+    <h1>Daftar Artikel</h1>
+    <p>Total ditandai: {{ countCheck }}</p>
+    <button @click="showForm = !showForm">{{ (showForm) ? 'Batalkan' : 'Tambah Artikel' }}</button>
+    <div v-if="showForm">
+        <h3>Isi Form:</h3>
+        <form @submit.prevent="submitForm">
+            <input type="text" name="title" placeholder="Judul...">
+            <input type="text" name="description" placeholder="Deskripsi...">
+            <select name="img">
+                <option value="vue.png">Vue</option>
+                <option value="react.png">React</option>
+                <option value="angular.png">Angular</option>
+            </select>
+            <button type="submit">Publish</button>
+        </form>
+    </div>
+    <div class="card" :class="{green: article.check}" v-for="article in articles" key="article.title">
+        <img :src="'img/' + article.img">
+        <h2>{{ article.title }}</h2>
+        <p>{{ article.description }}</p>
+        <label for="check">
+            <input id="check" type="checkbox" :checked="article.check" @change="article.check = !article.check">
+            Tandai
+        </label>
     </div>
 </div>
 
@@ -24,7 +42,50 @@
     const app = {
         data() {
             return {
-                number: 0
+                articles: [
+                    {
+                        img: 'vue.png',
+                        title: 'Learning Vue.js',
+                        description: 'Lets learn vue with pujayana',
+                        check: false,
+                    },
+                    {
+                        img: 'react.png',
+                        title: 'React here for you',
+                        description: 'Easy step to learn react',
+                        check: false,
+                    },
+                ],
+                showForm: false,
+            }
+        },
+        computed: {
+            countCheck(){
+                return this.articles.filter((a) => a.check == true).length
+            }
+        },
+        methods: {
+            submitForm(event){
+                const els = event.target.elements
+
+                let title = els.title.value
+                let description = els.description.value
+                let img = els.img.value
+
+                this.articles.push({
+                    img: img,
+                    title: title,
+                    description: description,
+                    check: false
+                })
+
+                els.title.value = ''
+                els.description.value = ''
+                els.img.value = 'vue.png'
+
+                this.showForm = false
+
+                alert("Berhasil menambahkan artikel!")
             }
         }
     }

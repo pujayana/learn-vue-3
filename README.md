@@ -1,1 +1,2 @@
-#Learn Vue 3
+# Learn Vue 3 - basic
+Enjoy the code </>

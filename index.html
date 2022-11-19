@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 3 Learn</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+    <h1>Test Article</h1>
+    <p>Welcome to testing with Vue 3</p>
+    <div class="card">
+        <img src="img/vue.png">
+        <h1>Judul</h1>
+        <p>Deskripsi</p>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    const app = {
+        data() {
+            return {
+                number: 0
+            }
+        }
+    }
+
+    Vue.createApp(app).mount("#app")
+</script>
+</body>
+</html>

@@ -30,8 +30,8 @@
         <img :src="'img/' + article.img">
         <h2>{{ article.title }}</h2>
         <p>{{ article.description }}</p>
-        <label for="check">
-            <input id="check" type="checkbox" :checked="article.check" @change="article.check = !article.check">
+        <label>
+            <input type="checkbox" :checked="article.check" @change="article.check = !article.check">
             Tandai
         </label>
     </div>
